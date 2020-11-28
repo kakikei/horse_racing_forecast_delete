@@ -1,0 +1,2 @@
+module PastResultsHelper
+end
