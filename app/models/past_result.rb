@@ -1,5 +1,5 @@
 class PastResult < ApplicationRecord
-  belongs_to :house
+  has_many :house
 
   validates :ranking, presence: true
   validates :distance, presence: true
