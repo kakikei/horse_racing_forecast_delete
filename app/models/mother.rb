@@ -1,4 +1,4 @@
 class Mother < ApplicationRecord
-  has_many :houses
+  has_many :horses
   validates :name, presence: true
 end

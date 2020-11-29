@@ -1,7 +1,7 @@
 class Horse < ApplicationRecord
   has_many :past_resutls
-  belongs_to :fathers
-  belongs_to :mothers
+  belongs_to :father
+  belongs_to :mother
 
   validates :name, presence: true
   validates :father, presence: true
