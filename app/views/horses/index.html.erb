@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Horses</h1>
+<%= form_tag(access_site_path, method: :post) do %>
+  <%= label_tag :url %>
+  <%= text_field_tag :url %>
+  <%= submit_tag "追加" %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Father</th>
+      <th>Mother</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @horses.each do |horse| %>
+      <tr>
+        <td><%= horse.father.name %></td>
+        <td><%= horse.mother.name %></td>
+        <td><%= horse.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

@@ -1,34 +1,18 @@
 class HorsesController < ApplicationController
-  before_action :set_params
-  def new
-    @horse = Horse.new
+  before_action :url_params, only: :access_site
+
+  def index
+    @horses = Horse.includes(:father, :mother).all
   end
 
-  def create
-    @horse = Horse.create(horse_params)
-    if @horse.save
-      flash[:success] = "Horse successfully created"
-      redirect_to @horse
-    else
-      flash[:error] = "Something went wrong"
-      render 'new'
-    end
-  end
-
-  def update
-    @horse = Horse.find(params[:id])
-      if @horse.update_attributes(params[:horse])
-        flash[:success] = "Horse was successfully updated"
-        redirect_to @horse
-      else
-        flash[:error] = "Something went wrong"
-        render 'edit'
-      end
+  def access_site
+    GetHorseInfoByJraJob.perform_later(params[:url])
+    redirect_to root_path
   end
 
   private
 
-  def horse_params
-    params.require(:horse).permit(:id, :name, :father, :mother)
+  def url_params
+    params.permit(:url)
   end
 end
