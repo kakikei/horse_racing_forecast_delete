@@ -5,6 +5,10 @@ class HorsesController < ApplicationController
     @horses = Horse.includes(:father, :mother).all
   end
 
+  def show
+    @horse = Horse.find(params[:id])
+  end
+
   def access_site
     GetHorseInfoByJraJob.perform_later(params[:url])
     redirect_to root_path, notice: '取得中です'
