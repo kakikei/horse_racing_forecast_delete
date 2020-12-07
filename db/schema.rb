@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_28_161110) do
+ActiveRecord::Schema.define(version: 2020_12_07_134345) do
+
+  create_table "averages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "horse_id", null: false
+    t.date "match_day", null: false
+    t.float "average_time", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["horse_id"], name: "index_averages_on_horse_id"
+  end
 
   create_table "fathers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -45,6 +54,7 @@ ActiveRecord::Schema.define(version: 2020_11_28_161110) do
     t.index ["horse_id"], name: "index_past_results_on_horse_id"
   end
 
+  add_foreign_key "averages", "horses"
   add_foreign_key "horses", "fathers"
   add_foreign_key "horses", "mothers"
   add_foreign_key "past_results", "horses"

@@ -1,5 +1,6 @@
 class Horse < ApplicationRecord
   has_many :past_resutls
+  has_many :averages
   belongs_to :father
   belongs_to :mother
 
